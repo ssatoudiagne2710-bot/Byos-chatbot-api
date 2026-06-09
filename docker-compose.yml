@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # --- Service 1 : Le serveur Ollama ---
+  ollama-server:
+    image: ollama/ollama:latest
+    container_name: ollama-container
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_storage:/root/.ollama
+    environment:
+      - OLLAMA_NUM_PARALLEL=4
+      - OLLAMA_MAX_LOADED_MODELS=2
+    restart: unless-stopped
+    networks:
+      - byos-network
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # --- Service 2 : Ton API FastAPI ---
+  byos-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chatbot-container
+    ports:
+      - "8000:8080"
+    env_file:
+      - .env
+    environment:
+      - OLLAMA_HOST=http://ollama-server:11434 # <--- Retour au nom de service direct
+    depends_on:
+      ollama-server:
+        condition: service_healthy
+    networks:
+      - byos-network
+
+  # --- Service 3 : Le Reverse Proxy Nginx ---
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: nginx-container
+    ports:
+      - "80:80"  # Permet d'accéder à http://ollama-server depuis ton Mac
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      ollama-server:
+        condition: service_healthy
+    networks:
+      - byos-network
+
+volumes:
+  ollama_storage: 
+
+networks:
+  byos-network:
+    driver: bridge

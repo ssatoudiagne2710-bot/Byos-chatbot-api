@@ -1,0 +1,12 @@
+# Sécurité : Identifiants Elasticsearch et Ollama
+.env
+
+# Python : Fichiers inutiles ou temporaires
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# Base ChromaDB (on l'exclut pour repartir sur une base propre dans Docker)
+.chroma_db/
+chroma_db/
