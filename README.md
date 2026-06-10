@@ -44,18 +44,31 @@ docker compose up -d --build
 
 3. Structure des Fichiers Clés
 
-main.py              # Point d'entrée de l'application FastAPI
-data_loader.py       # Récuperation et ingestion des données
-rag_engine.py        # Mémoire sémantiqque du système
-chatbot.py           # Logique métier, invite système (Prompt) et streaming LangChain
-Dockerfile           # Build de l'image de l'API (Optimisé CPU/Torch)
-docker-compose.yml   # Orchestration multi-conteneurs
-nginx.conf           # Reverse proxy pour la sécurisation du API
-chatbot.py           # Logique métier, invite système (Prompt) et streaming LangChain
-Dockerfile           # Build de l'image de l'API (Optimisé CPU/Torch)
-docker-compose.yml   # Orchestration multi-conteneurs avec Alias Réseau
-.dockerignore        # Exclusion des fichiers inutiles (ex: logs, configurations locales)
-requirements.txt     # Dépendances Python du projet
-chroma.db            # Base de données vectorielle
-.gitignore           # Exclusion des fichiers inutiles
+main.py              # Point d'entrée de l'application FastAPI;
+
+data_loader.py       # Récuperation et ingestion des données;
+
+rag_engine.py        # Mémoire sémantiqque du système;
+
+chatbot.py           # Logique métier, invite système (Prompt) et streaming LangChain;
+
+Dockerfile           # Build de l'image de l'API (Optimisé CPU/Torch);
+
+docker-compose.yml   # Orchestration multi-conteneurs;
+
+nginx.conf           # Reverse proxy pour la sécurisation du API;
+
+chatbot.py           # Logique métier, invite système (Prompt) et streaming LangChain;
+
+Dockerfile           # Build de l'image de l'API (Optimisé CPU/Torch);
+
+docker-compose.yml   # Orchestration multi-conteneurs avec Alias Réseau;
+
+.dockerignore        # Exclusion des fichiers inutiles (ex: logs, configurations locales);
+
+requirements.txt     # Dépendances Python du projet;
+
+chroma.db            # Base de données vectorielle;
+
+.gitignore           # Exclusion des fichiers inutiles;
 
