@@ -20,41 +20,42 @@ Le projet s'appuie sur une infrastructure conteneurisée et optimisée pour s'ex
 
 ## 🛠️ Configuration du Projet
 
-### 1. Variables d'environnement (`.env`)
+1. Variables d'environnement (`.env`)
 Créez un fichier `.env` à la racine du projet sur le modèle suivant :
 
-# Configuration de la source de données (Elasticsearch)
+Configuration de la source de données (Elasticsearch)
 ES_HOST=https://your-secure-elasticsearch-cluster.com:443
 ES_USER=api_data_user
 ES_PASSWORD=YourSuperSecurePassword123!
 ES_INDEX=production_tickets_index
 
-# Configuration du Modèle de Langage (LLM)
+Configuration du Modèle de Langage (LLM)
 OLLAMA_MODEL=llama3.1:latest
 
-# Configuration Réseau Docker 
+Configuration Réseau Docker 
 OLLAMA_HOST=http://ollama-server:11434
 
 
-### 2. Déploiement avec Docker Compose
+2. Déploiement avec Docker Compose
 L'orchestration des services est automatisée. Le conteneur de l'API attend intelligemment que le service Ollama soit pleinement opérationnel (via un healthcheck natif ollama list) avant de démarrer son propre pipeline.
 Pour lancer l'application :
 
 docker compose up -d --build
 
-### 3. Structure des Fichiers Clés
+3. Structure des Fichiers Clés
 
-├── main.py              # Point d'entrée de l'application FastAPI
-├── data_loader.py       # Récuperation et ingestion des données
-├── rag_engine.py        # Mémoire sémantiqque du système
-├── chatbot.py           # Logique métier, invite système (Prompt) et streaming LangChain
-├── Dockerfile           # Build de l'image de l'API (Optimisé CPU/Torch)
-├── docker-compose.yml   # Orchestration multi-conteneurs
-├── nginx.conf           # Reverse proxy pour la sécurisation du API
-├── chatbot.py           # Logique métier, invite système (Prompt) et streaming LangChain
-├── Dockerfile           # Build de l'image de l'API (Optimisé CPU/Torch)
-├── docker-compose.yml   # Orchestration multi-conteneurs avec Alias Réseau
-├── .dockerignore        # Exclusion des fichiers inutiles (ex: logs, configurations locales)
-├── requirements.txt     # Dépendances Python du projet
-└── chroma.db            # Base de données vectorielle
+main.py              # Point d'entrée de l'application FastAPI
+data_loader.py       # Récuperation et ingestion des données
+rag_engine.py        # Mémoire sémantiqque du système
+chatbot.py           # Logique métier, invite système (Prompt) et streaming LangChain
+Dockerfile           # Build de l'image de l'API (Optimisé CPU/Torch)
+docker-compose.yml   # Orchestration multi-conteneurs
+nginx.conf           # Reverse proxy pour la sécurisation du API
+chatbot.py           # Logique métier, invite système (Prompt) et streaming LangChain
+Dockerfile           # Build de l'image de l'API (Optimisé CPU/Torch)
+docker-compose.yml   # Orchestration multi-conteneurs avec Alias Réseau
+.dockerignore        # Exclusion des fichiers inutiles (ex: logs, configurations locales)
+requirements.txt     # Dépendances Python du projet
+chroma.db            # Base de données vectorielle
+.gitignore           # Exclusion des fichiers inutiles
 
