@@ -4,6 +4,10 @@
 
 Il agit comme un collègue expert capable d'analyser en temps réel les données opérationnelles issues d'**Elasticsearch** (tickets d'intervention sur site, statistiques par zones et régions) et de restituer des analyses fluides, précises et contextuelles via une interface API streaming.
 
+## 📸 Aperçu
+<img width="2276" height="1126" alt="image" src="https://github.com/user-attachments/assets/1bd4ef16-6130-4537-affb-e045cfde3d6f" />
+
+
 ---
 
 ## 🏗️ Architecture & Choix Techniques
